@@ -45,12 +45,9 @@ Follow below different examples and ways to use this role.
   hosts: all
   connection: local
   gather_facts: false
-
-  vars:
-    network_discovery_community: "mycommunity"
-
   roles:
     - role: victorock.network_discovery
+      network_discovery_community: "mycommunity"
       autorun: true
 ```
 
