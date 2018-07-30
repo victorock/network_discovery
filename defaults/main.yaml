@@ -1,0 +1,2 @@
+network_discovery_host: "{{ inventory_hostname }}"
+network_discovery_version: "v2c"

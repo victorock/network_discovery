@@ -1,0 +1,13 @@
+network_discovery_map:
+  - network_os: 'asa'
+    regex_match: 'Cisco\sAdaptive\sSecurity\sAppliance'
+  - network_os: 'eos'
+    regex_match: 'Arista'
+  - network_os: 'ios'
+    regex_match: 'Cisco\sIOS\sSoftware'
+  - network_os: 'iosxr'
+    regex_match: 'Cisco\sIOS\sXR\sSoftware'
+  - network_os: 'junos'
+    regex_match: 'JUNOS'
+  - network_os: 'nxos'
+    regex_match: 'Cisco\sNexus\sOperating\sSystem'
