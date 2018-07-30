@@ -20,15 +20,15 @@ Variables are defined in `defaults/main.yml` and structured/encapsulated in `var
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
 | `autorun` | `False`  | Boolean to define if the role "autorun" (`tasks/main.yml`). Useful when you want to have dependencies solved by galaxy (`meta/main.yml`) but don't want it to run automatically.  |
-| `snmp_discovery_host` | `{{ inventory_hostname }}` | Set to target snmp server. |
-| `snmp_discovery_version` | `v2c`  | SNMP Version to use, v2/v2c or v3. |
-| `snmp_discovery_community` | `None` | SNMP Community (v2) |
-| `snmp_discovery_level` | `None` | Authentication level, required if version is v3. |
-| `snmp_discovery_integrity` | `None` | Hashing algorithm, required if version is v3. |
-| `snmp_discovery_privacy` | `None` | Encryption algorithm, required if level is authPriv. |
-| `snmp_discovery_username` | `None` | Username for SNMPv3, required if version is v3. |
-| `snmp_discovery_authkey` | `None` | Authentication key, required if version is v3. |
-| `snmp_discovery_privkey` | `None` | Encryption key, required if version is authPriv. |
+| `network_discovery_host` | `{{ inventory_hostname }}` | Set to target snmp server. |
+| `network_discovery_version` | `v2c`  | SNMP Version to use, v2/v2c or v3. |
+| `network_discovery_community` | `None` | SNMP Community (v2) |
+| `network_discovery_level` | `None` | Authentication level, required if version is v3. |
+| `network_discovery_integrity` | `None` | Hashing algorithm, required if version is v3. |
+| `network_discovery_privacy` | `None` | Encryption algorithm, required if level is authPriv. |
+| `network_discovery_username` | `None` | Username for SNMPv3, required if version is v3. |
+| `network_discovery_authkey` | `None` | Authentication key, required if version is v3. |
+| `network_discovery_privkey` | `None` | Encryption key, required if version is authPriv. |
 
 > NOTE: For additional  [DETAILS](https://docs.ansible.com/ansible/latest/modules/snmp_facts_module.html).
 
