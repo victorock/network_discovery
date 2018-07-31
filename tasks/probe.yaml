@@ -1,7 +1,7 @@
 - name: "probe asa"
   block:
     - fail:
-        msg: "there is no prober asa (asa_facts)..."
+        msg: "there is no prober for asa (asa_facts)..."
     - set_fact:
         network_discovery_os: "asa"
   rescue:
