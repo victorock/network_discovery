@@ -1,5 +1,14 @@
 - name: "{{ network_discovery }}.yaml"
   include_tasks: "{{ network_discovery }}.yaml"
 
-- name: "discover.yaml"
-  include_tasks: discover.yaml
+- name: "Set Network OS"
+  set_fact:
+    ansible_network_os: "{{ network_discovery_os | default('unknown') }}"
+
+- name: "Group by Network OS"
+  group_by:
+    key: "{{ ansible_network_os }}"
+
+- debug:
+    var: ansible_network_os
+    verbosity: 1

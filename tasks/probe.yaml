@@ -1,74 +1,99 @@
-- name: "probe asa"
-  block:
-    - fail:
-        msg: "there is no prober for asa (asa_facts)..."
-    - set_fact:
-        network_discovery_os: "asa"
-  rescue:
-    - debug:
-        msg: "not asa?"
-        verbosity: 1
-
 - name: "probe eos"
   block:
-    - eos_facts:
+    - name: "eos: Probe Device"
+      no_log: true
       connection: network_cli
+      eos_facts:
       vars:
         ansible_network_os: "eos"
-    - set_fact:
+    - name: "eos: Define platform"
+      set_fact:
         network_discovery_os: "eos"
+      when: ansible_net_version is defined
   rescue:
     - debug:
         msg: "not eos!"
-        verbosity: 1
+  when: network_discovery_os is not defined
 
 - name: "probe ios"
   block:
-    - ios_facts:
+    - name: "ios: Probe Device"
+      no_log: true
       connection: network_cli
+      ios_facts:
       vars:
         ansible_network_os: "ios"
-    - set_fact:
+    - name: "ios: Define platform"
+      set_fact:
         network_discovery_os: "ios"
+      when: ansible_net_version is defined
   rescue:
     - debug:
         msg: "not ios!"
+  when: network_discovery_os is not defined
 
 - name: "probe iosxr"
   block:
-    - ios_facts:
+    - name: "iosxr: Probe Device"
+      no_log: True
       connection: network_cli
+      iosxr_facts:
       vars:
         ansible_network_os: "iosxr"
-    - set_fact:
+    - name: "iosxr: Define platform"
+      set_fact:
         network_discovery_os: "iosxr"
+      when: ansible_net_version is defined
   rescue:
     - debug:
         msg: "not iosxr!"
-
+  when: network_discovery_os is not defined
 
 - name: "probe junos"
   block:
-    - junos_facts:
-      connection: network_cli
+    - name: "junos: Probe Device"
+      no_log: True
+      connection: netconf
+      junos_facts:
       vars:
         ansible_network_os: "junos"
-    - set_fact:
+    - name: "junos: Define platform"
+      set_fact:
         network_discovery_os: "junos"
+      when: ansible_net_version is defined
   rescue:
     - debug:
         msg: "not junos!"
-        verbosity: 1
+  when: network_discovery_os is not defined
 
 - name: "probe nxos"
   block:
-    - nxos_facts:
+    - name: "nxos: Probe Device"
+      no_log: True
       connection: network_cli
+      nxos_facts:
       vars:
         ansible_network_os: "nxos"
-    - set_fact:
+    - name: "nxos: Define platform"
+      set_fact:
         network_discovery_os: "nxos"
+      when: ansible_net_version is defined
   rescue:
     - debug:
         msg: "not nxos!"
-        verbosity: 1
+  when: network_discovery_os is not defined
+
+- name: "probe linux"
+  block:
+    - name: "linux: Probe Device"
+      no_log: True
+      connection: ssh
+      setup:
+    - name: "server: Define platform"
+      set_fact:
+        network_discovery_os: "linux"
+      when: distribution is defined
+  rescue:
+    - debug:
+        msg: "not linux!"
+  when: network_discovery_os is not defined
