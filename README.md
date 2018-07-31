@@ -1,7 +1,7 @@
 Ansible Role to Discover Network Devices
 =========
 
-Ansible role to Discover Network Devices. This role use [snmp_facts](https://docs.ansible.com/ansible/latest/modules/snmp_facts_module.html) to gather sysDescr ([RFC3418](https://tools.ietf.org/html/rfc3418)) or try/error of platform \*\_facts modules. After discovery of the device, we [add_host](https://docs.ansible.com/ansible/latest/modules/add_host_module.html) to the inventory group for Network OS (`see vars/main.yaml`).
+Ansible role to Discover Network Devices. This role use [snmp_facts](https://docs.ansible.com/ansible/latest/modules/snmp_facts_module.html) to gather sysDescr ([RFC3418](https://tools.ietf.org/html/rfc3418)) or probe of <platform>\_facts modules. After discovery of the device, devices are [grouped by](https://docs.ansible.com/ansible/latest/modules/group_by_module.html) Ansible Network OS.
 
 Contribute
 --------------
@@ -41,13 +41,13 @@ Follow below different examples and ways to use this role.
 
 ```YAML
 ---
-- name: "Network Discovery: SNMP"
+- name: "Network Discovery: Probe"
   hosts: all
   connection: local
   gather_facts: false
   roles:
     - role: victorock.network_discovery
-      network_discovery_snmp_community: "mycommunity"
+      network_discovery: "probe"
       autorun: true
 ```
 
