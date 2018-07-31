@@ -1,5 +1,5 @@
-- name: "Poll Device"
-  include_tasks: poll.yaml
+- name: "{{ network_discovery }}.yaml"
+  include_tasks: "{{ network_discovery }}.yaml"
 
-- name: "Discover Network OS"
+- name: "discover.yaml"
   include_tasks: discover.yaml

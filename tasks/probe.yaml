@@ -1,0 +1,74 @@
+- name: "probe asa"
+  block:
+    - fail:
+        msg: "there is no prober asa (asa_facts)..."
+    - set_fact:
+        network_discovery_os: "asa"
+  rescue:
+    - debug:
+        msg: "not asa?"
+        verbosity: 1
+
+- name: "probe eos"
+  block:
+    - eos_facts:
+      connection: network_cli
+      vars:
+        ansible_network_os: "eos"
+    - set_fact:
+        network_discovery_os: "eos"
+  rescue:
+    - debug:
+        msg: "not eos!"
+        verbosity: 1
+
+- name: "probe ios"
+  block:
+    - ios_facts:
+      connection: network_cli
+      vars:
+        ansible_network_os: "ios"
+    - set_fact:
+        network_discovery_os: "ios"
+  rescue:
+    - debug:
+        msg: "not ios!"
+
+- name: "probe iosxr"
+  block:
+    - ios_facts:
+      connection: network_cli
+      vars:
+        ansible_network_os: "iosxr"
+    - set_fact:
+        network_discovery_os: "iosxr"
+  rescue:
+    - debug:
+        msg: "not iosxr!"
+
+
+- name: "probe junos"
+  block:
+    - junos_facts:
+      connection: network_cli
+      vars:
+        ansible_network_os: "junos"
+    - set_fact:
+        network_discovery_os: "junos"
+  rescue:
+    - debug:
+        msg: "not junos!"
+        verbosity: 1
+
+- name: "probe nxos"
+  block:
+    - nxos_facts:
+      connection: network_cli
+      vars:
+        ansible_network_os: "nxos"
+    - set_fact:
+        network_discovery_os: "nxos"
+  rescue:
+    - debug:
+        msg: "not nxos!"
+        verbosity: 1

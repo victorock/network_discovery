@@ -1,21 +1,11 @@
-- name: "Match Network OS"
-  set_fact:
-    network_discovery_os: "{{ match.network_os }}"
-  loop: "{{ network_discovery_map }}"
-  loop_control:
-    loop_var: match
-  when: ansible_sysdescr | regex_match( match.regex_match )
-
-- name: "Define Network OS"
-  set_fact:
+- name: "Add to Network OS inventory group"
+  add_host:
+    name: "{{ inventory_hostname }}"
     ansible_network_os: "{{ network_discovery_os | default('unknown') }}"
+    groups: "{{ network_discovery_os | default('unknown') }}"
   when: ansible_network_os is not defined
 
 - name: "Print Network OS"
   debug:
     var: ansible_network_os
     verbosity: 2
-
-- name: "Group devices by Network OS"
-  group_by:
-    key: "{{ ansible_network_os }}"

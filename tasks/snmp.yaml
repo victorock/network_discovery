@@ -1,0 +1,21 @@
+- name: "Gather snmp_facts"
+  snmp_facts:
+    host: "{{ network_discovery_snmp_host | default(inventory_hostname) }}"
+    version: "{{ network_discovery_snmp_version | default(mandatory) }}"
+    community: "{{ network_discovery_snmp_community | default(omit) }}"
+    level: "{{ network_discovery_snmp_level | default(omit) }}"
+    integrity: "{{ network_discovery_snmp_integrity | default(omit) }}"
+    privacy: "{{ network_discovery_snmp_privacy | default(omit) }}"
+    username: "{{ network_discovery_snmp_username | default(omit) }}"
+    authkey: "{{ network_discovery_snmp_authkey | default(omit) }}"
+    privkey: "{{ network_discovery_snmp_privkey | default(omit) }}"
+
+- name: "Match sysDescr's Network OS"
+  set_fact:
+    network_discovery_os: "{{ match.network_os }}"
+  loop: "{{ network_discovery_snmp_sysdescr_map }}"
+  loop_control:
+    loop_var: match
+  when:
+    - ansible_sysdescr is defined
+    - ansible_sysdescr | regex_match( match.regex_match )
