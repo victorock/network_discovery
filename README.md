@@ -29,6 +29,8 @@ Variables are defined in `defaults/main.yml` and structured/encapsulated in `var
 | `network_discovery_snmp_username` | `None` | Username for SNMPv3, required if version is v3. |
 | `network_discovery_snmp_authkey` | `None` | Authentication key, required if version is v3. |
 | `network_discovery_snmp_privkey` | `None` | Encryption key, required if version is authPriv. |
+| `network_discovery_probe_groups` | `[ 'eos', 'ios', 'iosxr', 'junos', 'linux', 'nxos' ]` | Probe Groups, meaning type of devices to discover. Supported: [ 'eos', 'ios', 'iosxr', 'junos', 'linux', 'nxos' ] |
+
 
 > NOTE: For additional  [DETAILS](https://docs.ansible.com/ansible/latest/modules/snmp_facts_module.html).
 

@@ -1,0 +1,20 @@
+- name: "iosxr: test connectivity"
+  connection: network_cli
+  wait_for_connection:
+    timeout: 10
+
+- name: "probe iosxr"
+  block:
+    - name: "iosxr: Probe Device"
+      no_log: True
+      connection: network_cli
+      iosxr_facts:
+
+    - name: "iosxr: Define platform"
+      set_fact:
+        network_discovery_os: "iosxr"
+      when: ansible_net_version is defined
+
+  rescue:
+    - debug:
+        msg: "not iosxr!"

@@ -1,0 +1,20 @@
+- name: "junos: test connectivity"
+  connection: netconf
+  wait_for_connection:
+    timeout: 10
+
+- name: "probe junos"
+  block:
+    - name: "junos: Probe Device"
+      no_log: True
+      connection: netconf
+      junos_facts:
+
+    - name: "junos: Define platform"
+      set_fact:
+        network_discovery_os: "junos"
+      when: ansible_net_version is defined
+
+  rescue:
+    - debug:
+        msg: "not junos!"

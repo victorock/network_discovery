@@ -1,0 +1,20 @@
+- name: "nxos: test connectivity"
+  connection: network_cli
+  wait_for_connection:
+    timeout: 10
+
+- name: "probe nxos"
+  block:
+    - name: "nxos: Probe Device"
+      no_log: True
+      connection: network_cli
+      nxos_facts:
+
+    - name: "nxos: Define platform"
+      set_fact:
+        network_discovery_os: "nxos"
+      when: ansible_net_version is defined
+
+  rescue:
+    - debug:
+        msg: "not nxos!"

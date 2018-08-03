@@ -1,0 +1,20 @@
+- name: "eos: test connectivity"
+  connection: network_cli
+  wait_for_connection:
+    timeout: 10
+
+- name: "probe eos"
+  block:
+    - name: "eos: Probe Device"
+      no_log: true
+      connection: network_cli
+      eos_facts:
+
+    - name: "eos: Define platform"
+      set_fact:
+        network_discovery_os: "eos"
+      when: ansible_net_version is defined
+
+  rescue:
+    - debug:
+        msg: "not eos!"
