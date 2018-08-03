@@ -13,7 +13,7 @@
     - name: "junos: Define platform"
       set_fact:
         network_discovery_os: "junos"
-      when: ansible_net_version is defined
+      when: ansible_net_model is defined
 
   rescue:
     - debug:
