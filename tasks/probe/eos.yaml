@@ -2,6 +2,7 @@
   connection: network_cli
   wait_for_connection:
     timeout: 10
+  when: network_discovery_os is not defined
 
 - name: "probe eos"
   block:
@@ -20,3 +21,4 @@
   rescue:
     - debug:
         msg: "not eos!"
+  when: network_discovery_os is not defined
