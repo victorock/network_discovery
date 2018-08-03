@@ -9,6 +9,8 @@
       no_log: True
       connection: network_cli
       nxos_facts:
+        gather_subset:
+          - default
 
     - name: "nxos: Define platform"
       set_fact:

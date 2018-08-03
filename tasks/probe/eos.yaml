@@ -9,6 +9,8 @@
       no_log: true
       connection: network_cli
       eos_facts:
+        gather_subset:
+          - default
 
     - name: "eos: Define platform"
       set_fact:

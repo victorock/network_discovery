@@ -9,6 +9,8 @@
       no_log: true
       connection: network_cli
       ios_facts:
+        gather_subset:
+          - default
 
     - name: "ios: Define platform"
       set_fact:

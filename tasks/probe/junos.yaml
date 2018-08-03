@@ -9,6 +9,8 @@
       no_log: True
       connection: netconf
       junos_facts:
+        gather_subset:
+          - default
 
     - name: "junos: Define platform"
       set_fact:

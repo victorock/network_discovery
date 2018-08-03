@@ -9,6 +9,8 @@
       no_log: True
       connection: network_cli
       iosxr_facts:
+        gather_subset:
+          - default
 
     - name: "iosxr: Define platform"
       set_fact:
