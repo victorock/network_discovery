@@ -1,0 +1,22 @@
+- name: "linux: test connectivity"
+  connection: ssh
+  wait_for_connection:
+    timeout: 10
+  when: network_discovery_os is not defined
+
+- name: "probe linux"
+  block:
+    - name: "linux: Probe Device"
+      no_log: True
+      connection: ssh
+      setup:
+
+    - name: "server: Define platform"
+      set_fact:
+        network_discovery_os: "linux"
+      when: distribution is defined
+
+  rescue:
+    - debug:
+        msg: "not linux!"
+  when: network_discovery_os is not defined

@@ -1,2 +1,9 @@
 network_discovery: "snmp"
 network_discovery_snmp_version: "v2c"
+network_discovery_probe_groups:
+  - eos
+  - nxos
+  - junos
+  - ios
+  - iosxr
+  - linux

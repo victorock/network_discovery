@@ -1,0 +1,24 @@
+- name: "ios: test connectivity"
+  connection: network_cli
+  wait_for_connection:
+    timeout: 10
+  when: network_discovery_os is not defined
+
+- name: "probe ios"
+  block:
+    - name: "ios: Probe Device"
+      no_log: true
+      connection: network_cli
+      ios_facts:
+        gather_subset:
+          - default
+
+    - name: "ios: Define platform"
+      set_fact:
+        network_discovery_os: "ios"
+      when: ansible_net_model is defined
+
+  rescue:
+    - debug:
+        msg: "not ios!"
+  when: network_discovery_os is not defined
